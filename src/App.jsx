@@ -1,14 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Hero from "./components/Hero"
 
 function App() {
 
   return (
-    <div>
-      Zentry
-    </div>
+    <main className="relative w-screen h-screen overflow-x-hidden">
+      <Hero/>
+    </main>
   )
 }
 
