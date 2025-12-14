@@ -36,7 +36,6 @@ export default function Hero(){
                               loop
                               src={getVideoSrc(currentIndex+1)}
                               muted
-                              playsInline
                               id='current-video'
                               className="size-64 origin-center scale-150 object-cover object-center"
                               onLoadedData={handleVideoLoaded}
