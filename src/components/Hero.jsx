@@ -34,7 +34,7 @@ export default function Hero(){
                             <video 
                               ref={nextVideoRef}
                               loop
-                              src={getVideoSrc(currentIndex+1)}
+                              src={getVideoSrc(upcomingVideo)}
                               muted
                               id='current-video'
                               className="size-64 origin-center scale-150 object-cover object-center"
@@ -42,6 +42,36 @@ export default function Hero(){
                             />
                         </div>
                     </div>
+                    <video
+                      ref={nextVideoRef}
+                      src={getVideoSrc(currentIndex)}
+                      loop
+                      muted
+                      id='next-video'
+                      className="absolute absolute-center z-20 size-64 object-cover object-center invisible"
+                      onLoadedData={handleVideoLoaded}
+                    />
+                    <video 
+                       src={getVideoSrc(currentIndex===totalVideos-1?1:currentIndex)}
+                       muted
+                       autoPlay
+                       loop
+                       className="absolute left-0 top-0 size-full object-cover object-center"
+                       onLoadedData={handleVideoLoaded}
+                    />
+                </div>
+                <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75" >
+                    G<b>a</b>ming
+                </h1>
+                <div className="absolute left-0 top-0 z-40 size-full">
+                   <div className="mt-24 px-5 sm:px-10">
+                     <h1 className="special-font hero-heading text-blue-100">
+                        redefi<b>n</b>e
+                    </h1>
+                    <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
+                        Enter the Metagame layer <br/> Unleash the Play Economy
+                    </p>
+                   </div>
                 </div>
              </div>
         </div>
