@@ -1,8 +1,9 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Button from "./Button"
 import { TiLocationArrow } from "react-icons/ti"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { ScrollTrigger } from "gsap/all"
 
 export default function Hero() {
     const [currentIndex, setCurrentIndex] = useState(1)
@@ -10,8 +11,16 @@ export default function Hero() {
     const [isLoading, setIsLoading] = useState(true)
     const [loadedVideos, setLoadedVideos] = useState(0)
 
-    const totalVideos = 3
+    const totalVideos = 4
     const nextVideoRef = useRef(null)
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    useEffect(()=>{
+        if(loadedVideos===totalVideos-1){
+            setIsLoading(false)
+        }
+    },[loadedVideos])
 
     useGSAP(() => {
         gsap.set('#next-video', { visibility: 'visible' });
@@ -35,13 +44,29 @@ export default function Hero() {
 
     }, { dependencies: [currentIndex], revertOnUpdate: true })
 
+    useGSAP(() => {
+        gsap.set('#video-frame', {
+            clipPath: 'polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)',
+            borderRadius: '0 0 40% 10%'
+        })
+        gsap.from('#video-frame', {
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+            borderRadius: '0 0 0 0',
+            ease: 'power1.inOut',
+            scrollTrigger: {
+                trigger: '#video-frame',
+                start: 'center center',
+                end: 'bottom center',
+                markers:true,
+                scrub: true
+            }
+        })
+    },[])
+
     const upcomingVideo = (currentIndex % totalVideos) + 1
     const handleMiniVdClick = () => {
         setHasClicked(true)
-
         setCurrentIndex(upcomingVideo)
-        console.log(currentIndex, 'current index')
-        console.log(upcomingVideo, 'upcoming index')
     }
 
     const handleVideoLoaded = () => {
@@ -52,6 +77,15 @@ export default function Hero() {
 
     return (
         <div className="relative h-dvh w-screen overflow-x-hidden">
+            {isLoading && (
+                <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
+                    <div className="three-body">
+                        <div className="three-body__dot" />
+                        <div className="three-body__dot" />
+                        <div className="three-body__dot" />
+                    </div>
+                </div>
+            )}
             <div id='video-frame' className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75">
                 <div>
                     <div className="mask-clip-path absolute-center z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
