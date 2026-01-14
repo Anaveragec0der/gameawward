@@ -57,7 +57,6 @@ export default function Hero() {
                 trigger: '#video-frame',
                 start: 'center center',
                 end: 'bottom center',
-                markers:true,
                 scrub: true
             }
         })
