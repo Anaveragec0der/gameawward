@@ -77,7 +77,7 @@ export default function Hero() {
     return (
         <div className="relative h-dvh w-screen overflow-x-hidden">
             {isLoading && (
-                <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
+                <div className="flex-center absolute z-100 h-dvh w-screen overflow-hidden bg-violet-50">
                     <div className="three-body">
                         <div className="three-body__dot" />
                         <div className="three-body__dot" />
@@ -103,7 +103,7 @@ export default function Hero() {
                     <video
                         ref={nextVideoRef}
                         src={getVideoSrc(currentIndex)}
-                        loop
+                        // loop
                         muted
                         id='next-video'
                         className="absolute absolute-center z-20 size-64 object-cover object-center invisible"
