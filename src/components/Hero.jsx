@@ -103,7 +103,7 @@ export default function Hero() {
                     <video
                         ref={nextVideoRef}
                         src={getVideoSrc(currentIndex)}
-                        // loop
+                        loop
                         muted
                         id='next-video'
                         className="absolute absolute-center z-20 size-64 object-cover object-center invisible"
